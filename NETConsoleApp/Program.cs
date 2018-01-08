@@ -80,6 +80,11 @@ namespace NETConsoleApp
             deepCopyPc.Color = pc.Color; //@20180108-vincent: deep copy
             PPClass pp = new PPClass();
             pp.Test();
+            Ironman tony = new Ironman();
+            tony.Initialize();
+            ArmorSuite amSuite = tony;
+            amSuite.Initialize();
+
         }
     }
 }
