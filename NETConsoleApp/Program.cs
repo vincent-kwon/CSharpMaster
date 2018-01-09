@@ -122,6 +122,14 @@ namespace NETConsoleApp
 
             Dynamic dm = new Dynamic();
             dm.TestDynamic();
+            ThreadAndTask tt = new ThreadAndTask();
+            tt.TestThread();
+            tt.TestMonitor();
+            tt.TestTask();
+            //tt.TestTaskComplex();
+            tt.TestParallel();
+            tt.TestAsync();
+            Console.ReadLine();
         }
     }
 }
