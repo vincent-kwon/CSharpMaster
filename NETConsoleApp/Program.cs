@@ -96,6 +96,17 @@ namespace NETConsoleApp
             gInt.AddElement(7,2);
             Console.WriteLine("Generic: " + gInt.GetElement(0));
             Console.WriteLine("Generic: " + gInt.GetElement(1));
+            try
+            {
+                Exceptions.TestException();
+            }
+            finally
+            {
+                Console.WriteLine("Calling finally");
+            }
+            EventDelegateAction del = new EventDelegateAction();
+            del.TestDelegate();
+            del.TestEvent();
         }
     }
 }

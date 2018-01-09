@@ -43,11 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections.cs" />
+    <Compile Include="Dynamic.cs" />
     <Compile Include="EnumerableTest.cs" />
+    <Compile Include="EventDelegateAction.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="Ironman.cs" />
+    <Compile Include="LINQ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecialOperators.cs" />
+    <Compile Include="ThreadAndTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
