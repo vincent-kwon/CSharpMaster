@@ -107,6 +107,18 @@ namespace NETConsoleApp
             EventDelegateAction del = new EventDelegateAction();
             del.TestDelegate();
             del.TestEvent();
+
+            NETConsoleApp.Lambda l = new NETConsoleApp.Lambda();
+            l.TestLambda();
+
+            FunctionAction fa = new FunctionAction();
+            fa.TestFunction();
+            fa.TestAction();
+            fa.TestExpression();
+
+            ReflectionAttribute ra = new ReflectionAttribute();
+            ra.TestReflection();
+            ra.TestAttribute();
         }
     }
 }

@@ -47,11 +47,14 @@
     <Compile Include="EnumerableTest.cs" />
     <Compile Include="EventDelegateAction.cs" />
     <Compile Include="Exceptions.cs" />
+    <Compile Include="FunctionAction.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="Ironman.cs" />
+    <Compile Include="Lambda.cs" />
     <Compile Include="LINQ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionAttribute.cs" />
     <Compile Include="SpecialOperators.cs" />
     <Compile Include="ThreadAndTask.cs" />
   </ItemGroup>
