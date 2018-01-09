@@ -119,6 +119,9 @@ namespace NETConsoleApp
             ReflectionAttribute ra = new ReflectionAttribute();
             ra.TestReflection();
             ra.TestAttribute();
+
+            Dynamic dm = new Dynamic();
+            dm.TestDynamic();
         }
     }
 }
