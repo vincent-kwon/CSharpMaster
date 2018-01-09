@@ -19,7 +19,7 @@ namespace NETConsoleApp
             Console.WriteLine("PClass(): {0} {1} ", Name, Color); //@20180108-vincent: print
         }
 
-        protected PClass(int b) : this()
+        protected PClass(int b) : this() //@20180108-vincent-c++: In c++, base
         {
             Console.WriteLine("PClass(int b) {0}", b);
         }
@@ -29,7 +29,7 @@ namespace NETConsoleApp
             Console.WriteLine("PClass(int b, int c) {0}", c);
         }
 
-        ~PClass() //@20180108-vincent: no 한정자
+        ~PClass() //@20180108-vincent: no 한정자 //@02180108-vincent-c++: In c++, virtual needed
         {
             Console.WriteLine("destructor: {0} {1}", Name, PClass.Count);
         }
@@ -84,7 +84,11 @@ namespace NETConsoleApp
             tony.Initialize();
             ArmorSuite amSuite = tony;
             amSuite.Initialize();
+            Collections cl = new Collections();
 
+            EnumerableTest et = new EnumerableTest();
+            for (int i = 0; i < 5; i++) et[i] = i;
+            foreach (int e in et) Console.WriteLine("ET: " + e );
         }
     }
 }
