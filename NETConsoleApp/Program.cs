@@ -130,6 +130,7 @@ namespace NETConsoleApp
             tt.TestParallel();
             tt.TestAsync();
             Console.ReadLine();
+            SpecialOperators.TestSpecials();
         }
     }
 }
