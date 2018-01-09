@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Collections.cs" />
     <Compile Include="EnumerableTest.cs" />
+    <Compile Include="Generic.cs" />
     <Compile Include="Ironman.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

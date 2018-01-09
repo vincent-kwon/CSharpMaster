@@ -86,9 +86,16 @@ namespace NETConsoleApp
             amSuite.Initialize();
             Collections cl = new Collections();
 
-            EnumerableTest et = new EnumerableTest();
-            for (int i = 0; i < 5; i++) et[i] = i;
-            foreach (int e in et) Console.WriteLine("ET: " + e );
+            EnumerableTest<string> et = new EnumerableTest<string>();
+            for (int i = 0; i < 5; i++) et[i] = i.ToString();
+            foreach (var e in et) Console.WriteLine("EnumerationTest: " + e );
+
+            Generic<int> gInt = new Generic<int>();
+            gInt.AddElement(5,0);
+            gInt.AddElement(6,1);
+            gInt.AddElement(7,2);
+            Console.WriteLine("Generic: " + gInt.GetElement(0));
+            Console.WriteLine("Generic: " + gInt.GetElement(1));
         }
     }
 }
