@@ -14,6 +14,12 @@ namespace NETConsoleApp
             public int Height { get; set; }
         }
 
+        class Class
+        {
+            public string Name { get; set; }
+            public int[] Score { get; set; }
+        }
+
         public void TestLINQ()
         {
             // simple example
@@ -48,6 +54,24 @@ namespace NETConsoleApp
             foreach (var profile in profiles)
             {
                 Console.WriteLine("{0} {1}", profile.Name, profile.InchHeight);
+            }
+
+            // double from
+            Class[] arrClass =
+            {
+                new Class() { Name = "ABC", Score = new int[] {99, 80, 7, 24} },
+                new Class() { Name = "DEF", Score = new int[] {69, 30, 3, 44} },
+                new Class() { Name = "GHI", Score = new int[] {92, 88, 0, 17} },
+            };
+
+            var classes = from c in arrClass
+                          from s in c.Score //@20180111-vincent: return scores of c 
+                          where s < 60
+                          orderby s
+                          select new { c.Name, Lowest = s };
+            foreach (var c in classes)
+            {
+                Console.WriteLine("{0} {1}", c.Name, c.Lowest);
             }
         }
     }
