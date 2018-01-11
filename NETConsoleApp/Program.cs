@@ -131,6 +131,10 @@ namespace NETConsoleApp
             tt.TestAsync();
             Console.ReadLine();
             SpecialOperators.TestSpecials();
+
+            LINQ tl = new LINQ();
+            tl.TestLINQ();
+            
         }
     }
 }
