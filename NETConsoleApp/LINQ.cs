@@ -14,6 +14,12 @@ namespace NETConsoleApp
             public int Height { get; set; }
         }
 
+        class Product
+        {
+            public string Title { get; set; }
+            public string Star { get; set; }
+        }
+
         class Class
         {
             public string Name { get; set; }
@@ -72,6 +78,80 @@ namespace NETConsoleApp
             foreach (var c in classes)
             {
                 Console.WriteLine("{0} {1}", c.Name, c.Lowest);
+            }
+
+            // group by
+            Profile[] groupProfile =
+            {
+                new Profile() { Name = "Jordan", Height = 198 },
+                new Profile() { Name = "Lebrone", Height = 203 },
+                new Profile() { Name = "Magic", Height = 206 },
+                new Profile() { Name = "Bad", Height = 206 },
+                new Profile() { Name = "Kobe", Height = 203 },
+            };
+
+            var listProfile = from profile in groupProfile
+                              orderby profile.Name
+                              group profile by profile.Height > 200 into g //@20180113-vincent: group .. by ... into g
+                              select new { GroupKey = g.Key, Profiles = g };
+
+            foreach (var Group in listProfile)
+            {
+                Console.WriteLine("less than 200: {0}", Group.GroupKey);
+                foreach (var profile in Group.Profiles)
+                {
+                    Console.WriteLine(" {0}, {1}", profile.Name, profile.Height);
+                }
+            }
+
+            // inner join
+            Profile[] bballProfile =
+            {
+                new Profile() { Name = "Jordan", Height = 198 },
+                new Profile() { Name = "Lebrone", Height = 203 },
+                new Profile() { Name = "Magic", Height = 206 },
+                new Profile() { Name = "Bad", Height = 206 },
+                new Profile() { Name = "Kobe", Height = 203 },
+            };
+
+            Product[] bballProduct =
+            {
+                new Product() { Star = "Jordan", Title = "Chicago" },
+                new Product() { Star = "Lebrone", Title = "Cleveland" },
+                new Product() { Star = "Lebrone", Title = "Caverials" },
+                new Product() { Star = "Magic", Title = "LA" },
+                new Product() { Star = "Bad", Title = "Boston" },
+            };
+
+            var innerlistProfile =
+                from profile in bballProfile
+                join product in bballProduct on profile.Name equals product.Star
+                select new
+                {
+                    Name = profile.Name,
+                    Work = product.Title,
+                    Height = profile.Height
+                };
+            Console.WriteLine(" -- inner join --");
+            foreach (var profile in innerlistProfile)
+            {
+                Console.WriteLine("name: {0}, work: {1}, height:{2}", profile.Name, profile.Work, profile.Height);
+            }
+
+            var outerlistProfile =
+                from profile in bballProfile
+                join product in bballProduct on profile.Name equals product.Star into ps
+                from product in ps.DefaultIfEmpty(new Product { Title = "No team" })
+                select new
+                {
+                    Name = profile.Name,
+                    Work = product.Title,
+                    Height = profile.Height
+                };
+            Console.WriteLine(" -- Outer join --");
+            foreach (var profile in outerlistProfile)
+            {
+                Console.WriteLine("name: {0}, work: {1}, height:{2}", profile.Name, profile.Work, profile.Height);
             }
         }
     }
