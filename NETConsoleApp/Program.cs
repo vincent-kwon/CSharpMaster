@@ -134,7 +134,9 @@ namespace NETConsoleApp
 
             LINQ tl = new LINQ();
             tl.TestLINQ();
-            
+
+            Files f = new Files();
+            f.TestFile();
         }
     }
 }
