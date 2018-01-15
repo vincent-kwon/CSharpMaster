@@ -103,6 +103,22 @@ namespace NETConsoleApp
 
         public event EventHandler<MyEventArgs> myEvent;
 
+        public event EventHandler<MyEventArgs> myEvent2;
+
+        private EventHandler<MyEventArgs> myEventHandler3;
+
+        public event EventHandler<MyEventArgs> myEvent3
+        {
+            add
+            {
+                myEventHandler3 += value;
+            }
+            remove
+            {
+                myEventHandler3 -= value;
+            }
+        }
+
         //@20180115-vincent: basic event can be called without assinging test_method to EventHandler
         public void TestRealEvent()
         {
@@ -113,6 +129,22 @@ namespace NETConsoleApp
             myEvent += test_method2;
 
             myEvent.Invoke(this, new MyEventArgs { Name = "Vincent" });
+
+            //@20180115-vincent: new EventHandler<MyEventArgs>(delegate ...)
+            myEvent2 += new EventHandler<MyEventArgs>(delegate (Object sender, MyEventArgs args) 
+            {
+                Console.WriteLine("myEvent2 anonimous handler: " + args.Name);
+            });
+
+            myEvent2.Invoke(this, new MyEventArgs() { Name = "Vincent2" });
+
+            myEvent3 += delegate (Object sender, MyEventArgs args)  //@20180115-vincent: anonymous delegate should be accustomed to
+            {
+                Console.WriteLine("myEvent3 type delegate only no EventHandler:" + args.Name);
+            };
+
+            //@20180115-vincent: watch out. once add, remove are used, it can't be event.Invoke directly (make sense) 
+            myEventHandler3.Invoke(this, new MyEventArgs() { Name = "Vincent3 delegate style" });
         }
     }
 
