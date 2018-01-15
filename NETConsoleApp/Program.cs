@@ -137,6 +137,8 @@ namespace NETConsoleApp
 
             Files f = new Files();
             f.TestFile();
+
+            del.TestRealEvent();
         }
     }
 }

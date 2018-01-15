@@ -17,13 +17,15 @@ namespace NETConsoleApp
         delegate int Compare<T>(T a, T b);
 
         //@20180109-vincent: Name event handler is not important, any delegator is fine
-        public delegate void EventHandler(string message);
+        public delegate void EventHandlerVincent(string message);
 
         public delegate void EventHandler2(int i);
 
         //@20180109-vincent: event is just simple repository of EventHandler
-        public event EventHandler SomethingHappened;
+        public event EventHandlerVincent SomethingHappened;
         public event EventHandler2 SomethingHappened2;
+
+        public event EventHandlerVincent realEvent;
 
         static int AscendCompare<T>(T a, T b) where T : IComparable<T>
         {
@@ -70,7 +72,7 @@ namespace NETConsoleApp
 
         public void TestEvent()
         {
-            SomethingHappened += new EventHandler(delegate (string message)
+            SomethingHappened += new EventHandlerVincent(delegate (string message)
             {
                 Console.WriteLine("Event callback !!!!!");
             });
@@ -86,6 +88,37 @@ namespace NETConsoleApp
                 Console.WriteLine("2nd delegate " + i);
             });
             SomethingHappened2(7777777); //@20180109-vincent: This can't be called outside but delegate is allowed
-        } 
+        }
+        public event EventHandler basicEvent;
+
+        public static void test_method(Object sender, EventArgs args) //@20180115-vincent: must be same as EventHandler signature. This is default EventHandler signature
+        {
+            Console.WriteLine("test_method is called");
+        }
+
+        public static void test_method2(Object sender, MyEventArgs args) //@20180115-vincent: must be same as EventHandler signature. This is default EventHandler signature
+        {
+            Console.WriteLine("test_method2 is called");
+        }
+
+        public event EventHandler<MyEventArgs> myEvent;
+
+        //@20180115-vincent: basic event can be called without assinging test_method to EventHandler
+        public void TestRealEvent()
+        {
+            basicEvent += test_method;
+
+            basicEvent.Invoke(this, new EventArgs());
+
+            myEvent += test_method2;
+
+            myEvent.Invoke(this, new MyEventArgs { Name = "Vincent" });
+        }
+    }
+
+    class MyEventArgs
+    {
+        public string Name { get; set; }
     }
 }
+
