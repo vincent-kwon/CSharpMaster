@@ -64,22 +64,15 @@ MethodInfo getterInfo =
 
 ㅁ private field: private IGestureRecognizer _gestureRecognizer; 
 
- 
-
 ㅁ caller member name
 
     public void ON-PROPERTYCHANGEd([CallerMemberName]string propertyName = "") =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
- 
-
 ㅁ DebuggerDisplay: [DebuggerDisplay("R={R}, G={G}, B={B}, A={A}, Hue={Hue}, Saturation={Saturation}, Luminosity={Luminosity}")]
    디버거 보았을 떄 좀 더 잘 나오게
- 
 
 ㅁ 숨기기: [EditorBrowsable(EditorBrowsableState.Never)]
-
- 
 
 ㅁ internal: public static Color Accent { get; internal set; }
 
@@ -126,11 +119,8 @@ MethodInfo getterInfo =
    default: //everything else will result in unexpected results
        return Default;
    }
-
- 
-
+   
 ㅁ #if !NETSTANDARD1_0 / #endif
- 
 
 ㅁ  [Xaml.ProvideCompiled("Xamarin.Forms.Core.XamlC.ColorTypeConverter")]
     [Xaml.TypeConversion(typeof(Color))]
@@ -223,8 +213,7 @@ public Command(Action<T> execute, Func<T, bool> canExecute)
    if (canExecute == null)
     throw new ArgumentNullException(nameof(canExecute));
   }
-
-
+  
 ㅁ constructor
 
    public Command(Action<object> execute, Func<object, bool> canExecute) : this(execute)
@@ -252,19 +241,32 @@ public static Binding Create<TSource>(Expression<Func<TSource, object>> property
 
 ㅁ Type declarerType = methodCall.Method.DeclaringType;
 
+이 메소드가 hierarchy상 정의 된 곳 (DeclaringType) 과 실제 객체 (ReflectedType) 차이임
+
+MemberInfo m1 = typeof(Base).GetMethod("Method");
+MemberInfo m2 = typeof(Derived).GetMethod("Method");
+
+Console.WriteLine(m2.DeclaringType); //Base
+Console.WriteLine(m2.ReflectedType); //Derived
+
 ㅁ MemberExpression, UnaryExpression
 
+ㅁ Delegate advanced 
+
+delegate int del(int i); 
+del myDelegate = x => x * x;  
+
 ㅁ KeyValuePair
+
+   dictionary 에서 사용. c.Key, c.Value로  access
 
 foreach (KeyValuePair<string, object> c in Resources)
     innerKeys.Add(c.Key);
    foreach (KeyValuePair<string, object> value in values)
    {
     if (innerKeys.Add(value.Key))
-
  
-
-ㅁ Inner class (끝에 정의)
+ㅁ Inner class (끝에 정의) : ; 가 따로 없다. 
 
   class LayoutInformation
   {
@@ -277,3 +279,4 @@ foreach (KeyValuePair<string, object> c in Resources)
        public SizeRequest[] Requests;
  }
 
+ ㅁ default: 그 형의 주어진 값.
