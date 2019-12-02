@@ -1,14 +1,9 @@
 ﻿ㅁ TypeConverter: [TypeConverter(typeof(AcceleratorTypeConverter))]
-
- 
+   타입 컨버터를 이렇게 선언
 
 ㅁ public event EventHandler<CheckedChangedEventArgs> CheckedChanged; // 이벤트 핸들러는 이렇게
 
- 
-
 ㅁ public partial class CheckBox :  // public partial class XXX
-
- 
 
 ㅁ Bindable Property
 
@@ -39,14 +34,10 @@
       public static readonly BindableProperty BorderRadiusProperty = BindableProperty.Create("BorderRadius", typeof(int), typeof(Button), defaultValue: DefaultBorderRadius,
          propertyChanged: BorderRadiusPropertyChanged);
 
- 
-
    coerceValue: CoerceDate,
    propertyChanged: DatePropertyChanged,
    defaultValueCreator: (bindable) => DateTime.Today);
-
    validateValue: ValidateMinimumDate
-
  
 
    BindableProperty.Create(nameof(IsTabStop),
@@ -56,25 +47,15 @@
          propertyChanged: OnTabStopPropertyChanged,
          defaultValueCreator: TabStopDefaultValueCreator);
 
- 
-
-ㅁ Lazy: Is it really working?
+ ㅁ Lazy: Is it really working?
 
   // This is invoked when actually used.
-
   _platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<CheckBox>>(() => new PlatformConfigurationRegistry<CheckBox>(this));
-
- 
-
+  
 ㅁ IPlatformElementConfiguration
 
- 
-
 ㅁ 이게 뭐였지? 함수이름인데 리턴 하는 거던가? 
-
-    int IBorderElement.CornerRadiusDefaultValue => 0; 
-
- 
+  int IBorderElement.CornerRadiusDefaultValue => 0; 
 
 ㅁ LINQ: public IPlatformElementConfiguration<T, Button> On<T>() where T : IConfigPlatform
 
@@ -93,7 +74,7 @@ MethodInfo getterInfo =
  
 
 ㅁ DebuggerDisplay: [DebuggerDisplay("R={R}, G={G}, B={B}, A={A}, Hue={Hue}, Saturation={Saturation}, Luminosity={Luminosity}")]
-
+   디버거 보았을 떄 좀 더 잘 나오게
  
 
 ㅁ 숨기기: [EditorBrowsable(EditorBrowsableState.Never)]
@@ -102,47 +83,37 @@ MethodInfo getterInfo =
 
 ㅁ internal: public static Color Accent { get; internal set; }
 
- 
-
-ㅁ anonimous? var t3 = new[] { hue + 1.0f / 3.0f, hue, hue - 1.0f / 3.0f };
-
- 
+ㅁ anonimous type array var t3 = new[] { hue + 1.0f / 3.0f, hue, hue - 1.0f / 3.0f };
+   딱히 타입 specify 없이
+   var anonArray = new[] { new { name = "apple", diam = 4 },  
+                           new { name = "grape", diam = 1 }};
 
 ㅁ operator: public static bool operator ==(Color color1, Color color2)
 
- 
-
-ㅁ unchecked?
+ㅁ unchecked? 오버플로우 나도 무시해라
 
    unchecked
    {
-
     int hashcode = _r.GetHashCode();
     hashcode = (hashcode * 397) ^ _g.GetHashCode();
     hashcode = (hashcode * 397) ^ _b.GetHashCode();
     hashcode = (hashcode * 397) ^ _a.GetHashCode();
     return hashcode;
-
    }
 
- 
-
 ㅁ is: if (obj is Color)
-
- 
 
 ㅁ ToString()
 
    public override string ToString()
-  {
-   return string.Format(CultureInfo.InvariantCulture, "[Color: A={0}, R={1}, G={2}, B={3}, Hue={4}, Saturation={5}, Luminosity={6}]", A, R, G, B, Hue, Saturation, Luminosity);
-  }
+   {
+       return string.Format(CultureInfo.InvariantCulture, "[Color: A={0}, R={1}, G={2}, B={3}, Hue={4}, Saturation={5}, Luminosity={6}]", A, R, G, B, Hue, Saturation, Luminosity);
+   }
 
- 
+   프로그램 내에서 내부 작업을 수행 할 때마다 InvariantCulture를 사용하도록 CultureInfo를 지정해야합니다. 
+   예를 들어 직렬화와 함께 사용하면 데이터 표현이 항상 동일하므로 내부 데이터 형식의 국제화 문제에 대해 걱정할 필요가 없습니다.
 
 ㅁ uint
-
- 
 
 ㅁ switch (hex.Length - idx) {
     case 3: //#rgb => ffrrggbb
@@ -159,53 +130,33 @@ MethodInfo getterInfo =
  
 
 ㅁ #if !NETSTANDARD1_0 / #endif
-
  
 
 ㅁ  [Xaml.ProvideCompiled("Xamarin.Forms.Core.XamlC.ColorTypeConverter")]
     [Xaml.TypeConversion(typeof(Color))]
-
  
-
 ㅁ public override object
 
- 
-
 ㅁ value.StartsWith("rgb", StringComparison.OrdinalIgnoreCase : 스트링 비교
-
    elem.EndsWith("%", StringComparison.Ordinal)
-
- 
 
 ㅁ Exception: throw new InvalidOperationException($"Cannot convert \"{value}\" into {typeof(Color)}");
 
- 
-
 ㅁ Enum.TryParse(part, true, out FontAttributes attr)
-
- 
 
 ㅁ new: public new static readonly BindableProperty
 
- 
-
-ㅁ double.TryParse(value, out scaleX)
+ㅁ double.TryParse(value, out scaleX) string 받아서 double로
 
 ㅁ Color.FromHsla
 
- 
-
 ㅁ IndexOf:  var op = value.IndexOf('('); var cp = value.LastIndexOf(')'); string[] parts = value.Split('.');
-
- 
 
 ㅁ switch / case return
 
      switch (color.ToLowerInvariant()) {
      case "default": return Color.Default;
      case "accent": return Color.Accent;
-
- 
 
 ㅁ Obsolete
 
@@ -219,15 +170,11 @@ MethodInfo getterInfo =
 
 #pragma warning restore
 
- 
-
 ㅁ Type conversion
 
 [TypeConverter(typeof(ButtonContentTypeConverter))]
 
 [Xaml.TypeConversion(typeof(ButtonContentLayout))]
-
- 
 
 ㅁ get, set anonimous 
 
@@ -236,17 +183,11 @@ MethodInfo getterInfo =
    set => SetValue(CornerElement.CornerRadiusProperty, value);
   }
 
- 
-
 ㅁ anonimous extremem
 
 defaultValueCreator: (bindable) => DateTime.Today
 
- 
-
 ㅁ public sealed class Command<T> : Command 
-
- 
 
 ㅁ base 에 넘기기
 
@@ -265,8 +206,6 @@ public Command(Action<T> execute)
           throw new ArgumentNullException(nameof(execute));
       }
   }
-
- 
 
 ㅁ Action, Func
 
@@ -290,58 +229,32 @@ public Command(Action<T> execute, Func<T, bool> canExecute)
 
    public Command(Action<object> execute, Func<object, bool> canExecute) : this(execute)
 
- 
-
 ㅁ nameof, typeof
-
- 
 
 ㅁ .ToArray()
 
- 
-
 ㅁ readonly Action<double> _step; _step = f => { }; // 여기서 f 는 인자
-
- 
 
 ㅁ Math.Max, Math.Min
 
- 
-
 ㅁ foreach (var anim in _children)
-
- 
 
 ㅁ double finishAt = 1.0f
 
- 
-
 ㅁ throw ArgumentNullException(nameof(path));, throw new ArgumentException("path can not be an empty string", nameof(path));
-
- 
 
 ㅁ Expression
 
 public static Binding Create<TSource>(Expression<Func<TSource, object>> propertyGetter, BindingMode mode = BindingMode.Default, IValueConverter converter = null, object converterParameter = null,
              string stringFormat = null)
 
- 
-
 ㅁ internal override void 
-
- 
 
 ㅁ Type declarerType = methodCall.Method.DeclaringType;
 
- 
-
 ㅁ MemberExpression, UnaryExpression
 
- 
-
 ㅁ KeyValuePair
-
- 
 
 foreach (KeyValuePair<string, object> c in Resources)
     innerKeys.Add(c.Key);
@@ -352,8 +265,6 @@ foreach (KeyValuePair<string, object> c in Resources)
  
 
 ㅁ Inner class (끝에 정의)
-
- 
 
   class LayoutInformation
   {
