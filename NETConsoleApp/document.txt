@@ -1,0 +1,368 @@
+﻿ㅁ TypeConverter: [TypeConverter(typeof(AcceleratorTypeConverter))]
+
+ 
+
+ㅁ public event EventHandler<CheckedChangedEventArgs> CheckedChanged; // 이벤트 핸들러는 이렇게
+
+ 
+
+ㅁ public partial class CheckBox :  // public partial class XXX
+
+ 
+
+ㅁ Bindable Property
+
+      // Property
+
+      public bool IsChecked
+      {
+          get { return (bool)GetValue(IsCheckedProperty); }
+          set
+          {
+              SetValue(IsCheckedProperty, value);
+              ChangeVisualState();
+          }
+      }
+
+      // UI 구성이 변경됐을 때 propertyChanged 라는 인자에 anonimous 함수로 ?. 로 true 이면 Invoke를 함
+
+      // 또는 SetBinding으로 CheckBox bindable property 양방향 시에 불리는 거 확인 필요
+
+      public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(CheckBox), false,   
+
+          propertyChanged: (bindable, oldValue, newValue) =>
+          {
+              ((CheckBox)bindable).CheckedChanged?.Invoke(bindable, new CheckedChangedEventArgs((bool)newValue));
+              ((CheckBox)bindable).ChangeVisualState();
+           }, defaultBindingMode: BindingMode.TwoWay);
+
+      public static readonly BindableProperty BorderRadiusProperty = BindableProperty.Create("BorderRadius", typeof(int), typeof(Button), defaultValue: DefaultBorderRadius,
+         propertyChanged: BorderRadiusPropertyChanged);
+
+ 
+
+   coerceValue: CoerceDate,
+   propertyChanged: DatePropertyChanged,
+   defaultValueCreator: (bindable) => DateTime.Today);
+
+   validateValue: ValidateMinimumDate
+
+ 
+
+   BindableProperty.Create(nameof(IsTabStop),
+         typeof(bool),
+         typeof(VisualElement),
+         defaultValue: true,
+         propertyChanged: OnTabStopPropertyChanged,
+         defaultValueCreator: TabStopDefaultValueCreator);
+
+ 
+
+ㅁ Lazy: Is it really working?
+
+  // This is invoked when actually used.
+
+  _platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<CheckBox>>(() => new PlatformConfigurationRegistry<CheckBox>(this));
+
+ 
+
+ㅁ IPlatformElementConfiguration
+
+ 
+
+ㅁ 이게 뭐였지? 함수이름인데 리턴 하는 거던가? 
+
+    int IBorderElement.CornerRadiusDefaultValue => 0; 
+
+ 
+
+ㅁ LINQ: public IPlatformElementConfiguration<T, Button> On<T>() where T : IConfigPlatform
+
+MethodInfo getterInfo =
+      declarerType.GetProperties().Where(pi => pi.Name == indexerName && pi.CanRead && pi.GetMethod.IsPublic && !pi.GetMethod.IsStatic).Select(pi => pi.GetMethod).FirstOrDefault();
+
+ㅁ private field: private IGestureRecognizer _gestureRecognizer; 
+
+ 
+
+ㅁ caller member name
+
+    public void ON-PROPERTYCHANGEd([CallerMemberName]string propertyName = "") =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+ 
+
+ㅁ DebuggerDisplay: [DebuggerDisplay("R={R}, G={G}, B={B}, A={A}, Hue={Hue}, Saturation={Saturation}, Luminosity={Luminosity}")]
+
+ 
+
+ㅁ 숨기기: [EditorBrowsable(EditorBrowsableState.Never)]
+
+ 
+
+ㅁ internal: public static Color Accent { get; internal set; }
+
+ 
+
+ㅁ anonimous? var t3 = new[] { hue + 1.0f / 3.0f, hue, hue - 1.0f / 3.0f };
+
+ 
+
+ㅁ operator: public static bool operator ==(Color color1, Color color2)
+
+ 
+
+ㅁ unchecked?
+
+   unchecked
+   {
+
+    int hashcode = _r.GetHashCode();
+    hashcode = (hashcode * 397) ^ _g.GetHashCode();
+    hashcode = (hashcode * 397) ^ _b.GetHashCode();
+    hashcode = (hashcode * 397) ^ _a.GetHashCode();
+    return hashcode;
+
+   }
+
+ 
+
+ㅁ is: if (obj is Color)
+
+ 
+
+ㅁ ToString()
+
+   public override string ToString()
+  {
+   return string.Format(CultureInfo.InvariantCulture, "[Color: A={0}, R={1}, G={2}, B={3}, Hue={4}, Saturation={5}, Luminosity={6}]", A, R, G, B, Hue, Saturation, Luminosity);
+  }
+
+ 
+
+ㅁ uint
+
+ 
+
+ㅁ switch (hex.Length - idx) {
+    case 3: //#rgb => ffrrggbb
+        var t1 = ToHexD (hex [idx++]);
+        var t2 = ToHexD (hex [idx++]);
+        var t3 = ToHexD (hex [idx]);
+
+        return FromRgb ((int)t1, (int)t2, (int)t3);
+
+   default: //everything else will result in unexpected results
+       return Default;
+   }
+
+ 
+
+ㅁ #if !NETSTANDARD1_0 / #endif
+
+ 
+
+ㅁ  [Xaml.ProvideCompiled("Xamarin.Forms.Core.XamlC.ColorTypeConverter")]
+    [Xaml.TypeConversion(typeof(Color))]
+
+ 
+
+ㅁ public override object
+
+ 
+
+ㅁ value.StartsWith("rgb", StringComparison.OrdinalIgnoreCase : 스트링 비교
+
+   elem.EndsWith("%", StringComparison.Ordinal)
+
+ 
+
+ㅁ Exception: throw new InvalidOperationException($"Cannot convert \"{value}\" into {typeof(Color)}");
+
+ 
+
+ㅁ Enum.TryParse(part, true, out FontAttributes attr)
+
+ 
+
+ㅁ new: public new static readonly BindableProperty
+
+ 
+
+ㅁ double.TryParse(value, out scaleX)
+
+ㅁ Color.FromHsla
+
+ 
+
+ㅁ IndexOf:  var op = value.IndexOf('('); var cp = value.LastIndexOf(')'); string[] parts = value.Split('.');
+
+ 
+
+ㅁ switch / case return
+
+     switch (color.ToLowerInvariant()) {
+     case "default": return Color.Default;
+     case "accent": return Color.Accent;
+
+ 
+
+ㅁ Obsolete
+
+  [Obsolete("BorderRadiusProperty is obsolete as of 2.5.0. Please use CornerRadius instead.")]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+
+
+ㅁ 워닝 잠시 없애기
+
+#pragma warning disable 0618 
+
+#pragma warning restore
+
+ 
+
+ㅁ Type conversion
+
+[TypeConverter(typeof(ButtonContentTypeConverter))]
+
+[Xaml.TypeConversion(typeof(ButtonContentLayout))]
+
+ 
+
+ㅁ get, set anonimous 
+
+  public CornerRadius CornerRadius {
+   get => (CornerRadius)GetValue(CornerElement.CornerRadiusProperty);
+   set => SetValue(CornerElement.CornerRadiusProperty, value);
+  }
+
+ 
+
+ㅁ anonimous extremem
+
+defaultValueCreator: (bindable) => DateTime.Today
+
+ 
+
+ㅁ public sealed class Command<T> : Command 
+
+ 
+
+ㅁ base 에 넘기기
+
+public Command(Action<T> execute) 
+   : base(o =>
+   {
+       if (IsValidParameter(o))
+       {
+           execute((T)o);
+       }
+   })
+
+  {
+      if (execute == null)
+      {
+          throw new ArgumentNullException(nameof(execute));
+      }
+  }
+
+ 
+
+ㅁ Action, Func
+
+public Command(Action<T> execute, Func<T, bool> canExecute) 
+   : base(o =>
+   {
+    if (IsValidParameter(o))
+    {
+     execute((T)o);
+    }
+   }, o => IsValidParameter(o) && canExecute((T)o))
+  {
+   if (execute == null)
+    throw new ArgumentNullException(nameof(execute));
+   if (canExecute == null)
+    throw new ArgumentNullException(nameof(canExecute));
+  }
+
+
+ㅁ constructor
+
+   public Command(Action<object> execute, Func<object, bool> canExecute) : this(execute)
+
+ 
+
+ㅁ nameof, typeof
+
+ 
+
+ㅁ .ToArray()
+
+ 
+
+ㅁ readonly Action<double> _step; _step = f => { }; // 여기서 f 는 인자
+
+ 
+
+ㅁ Math.Max, Math.Min
+
+ 
+
+ㅁ foreach (var anim in _children)
+
+ 
+
+ㅁ double finishAt = 1.0f
+
+ 
+
+ㅁ throw ArgumentNullException(nameof(path));, throw new ArgumentException("path can not be an empty string", nameof(path));
+
+ 
+
+ㅁ Expression
+
+public static Binding Create<TSource>(Expression<Func<TSource, object>> propertyGetter, BindingMode mode = BindingMode.Default, IValueConverter converter = null, object converterParameter = null,
+             string stringFormat = null)
+
+ 
+
+ㅁ internal override void 
+
+ 
+
+ㅁ Type declarerType = methodCall.Method.DeclaringType;
+
+ 
+
+ㅁ MemberExpression, UnaryExpression
+
+ 
+
+ㅁ KeyValuePair
+
+ 
+
+foreach (KeyValuePair<string, object> c in Resources)
+    innerKeys.Add(c.Key);
+   foreach (KeyValuePair<string, object> value in values)
+   {
+    if (innerKeys.Add(value.Key))
+
+ 
+
+ㅁ Inner class (끝에 정의)
+
+ 
+
+  class LayoutInformation
+  {
+       public Rectangle Bounds;
+       public double CompressionSpace;
+       public Size Constraint;
+       public int Expanders;
+       public Size MinimumSize;
+       public Rectangle[] Plots;
+       public SizeRequest[] Requests;
+ }
+
