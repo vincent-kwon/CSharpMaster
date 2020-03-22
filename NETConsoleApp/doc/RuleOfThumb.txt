@@ -1,0 +1,154 @@
+﻿# C# Master Guide to Know
+
+
+1. internal static extern int 
+
+2. internal static extern void
+
+3. internal static extern bool
+
+4. internal static extern IntPtr
+
+5. internal delegate bool EcoreTimelineCallback(IntPtr data, double pos);
+
+6. internal static extern double ecore_animator_pos_map_n(double pos, PositionMap map, int v_size, double[] v);
+
+7. [DllImport(Libraries.Ecore)]
+
+8. internal static partial class Interop
+
+9.   internal static partial class Ecore
+
+10.    internal enum PositionMap 
+       {
+         Linear, 
+         Accelerate,
+
+11. For structure,
+    [StructLayout(LayoutKind.Sequential)]
+12. internal struct Size2D
+    {
+      public int w;
+      public int h;
+    };
+
+13. For bool return, [return: MarshalAs(UnmanagedType.U1)] 
+
+14. How to return char* to c#'s string: 
+
+       native: const char* elm_atspi_accessible_translation_domain_get(const Elm_Interface_Atspi_Accessible *obj)
+
+       c#:
+     
+       [DllImport(Libraries.Elementary, EntryPoint = "elm_atspi_accessible_translation_domain_get")]
+       internal static extern IntPtr _elm_atspi_accessible_translation_domain_get(IntPtr obj);
+
+    => internal static string elm_atspi_accessible_translation_domain_get(IntPtr obj) 
+       {
+         var str = _elm_astpi_accessible_translation_domain_get(obj);
+         return Marshal.PtrToStringAnsi(str);
+       }
+
+15. Other Mashal:
+
+    Marshal.Copy
+
+    Marshal.OffsetOf
+
+    Marshal.ReadIntPtr
+
+    Marshal.FreeHGlobal
+
+    Marshal.PtrToStructure<Type>(event_info)
+
+16. #pragma warning disable 3003
+
+    #pragma warning restore 3003
+
+17. #region Properties
+
+    #endregion Properties
+
+18. Comment 
+
+    /// <summary>
+    /// Sets the gesture state changed callback.
+    /// </summary>
+    /// <param name="type">The gesture you </param>
+    /// <returns></returns>
+    /// <since_tizen> preview </since_tizen>
+
+19. C# enum
+
+    public enum GestureType 
+    {
+        /// <summary>
+        /// N fingers single taps.
+        /// </summary>
+        Tap = 1, 
+    }   
+       
+
+20. Interop folder: Interop.Libraries
+
+    internal static partial class Libraries 
+    {
+        public const string Preference = "libcapi-appfw-preference.so.0";
+    }
+
+21. Pointer check : if (ptr == IntPtr.Zero)
+
+22. IDisposable
+
+23. Log.Error
+
+24. Async API
+
+    public async Task<TokenRequest> GetAccessTokenAsync(TokenRequest request)
+
+25. ErrorFactory.GetException(ret)
+
+    BadgeErrorFactory.GetException(BadgeError.InvalidParameter, "The count must be positive number");
+
+26. Task<IEnumerable<ApplicationRunningContext>> GetRunningApplicationAsync()
+
+27. ConfigureAwait
+
+28. using (ApplicationRunningContext context = new ApplicationRunningContext(closedHandle)) 
+    {
+
+    }
+
+29. public string Token { get; internal set; }
+
+30. public override string GetType { get; } = "refresh_token";
+
+31. Use private static: private static event ... 
+
+32. Interop.Badge.SetChangedCallback / UnsetChangedCallback
+
+33. Use dictionary for native callback to call:
+
+    private static Dictionary<int, Interop.Appcontrol.ResultCallback> s_resultNativeMaps = new Dictionary<int, Interop.AppControl.ResultCallback>();
+
+34. private string _operation = null;
+
+35. s_resultEventHandler, s_changed, s_totalSizeInfoCallbackDict
+
+36. Start(int geofenceId)
+
+37. s_stateChanged?.Invoke(null, evenArgs);
+
+38. private bool _disposed = false;
+
+39. public GeofenceManager() / ~GeofenceManager() { Dispose(false); }
+
+40. throw new InvalidOperationException
+    throw new Exceptions.OutOfMemoryException
+    throw new InvalidIOException; // public class InvalidIOException : InvalidOperationException { }
+    throw new global::System.ArgumentNullException("array");
+    throw new ArgumentNullException("alias should not be null");
+    
+41. 
+
+42. 
