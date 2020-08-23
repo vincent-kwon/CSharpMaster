@@ -149,6 +149,8 @@
     throw new global::System.ArgumentNullException("array");
     throw new ArgumentNullException("alias should not be null");
     
-41. 
+41. Discards _ switch statement
+    https://docs.microsoft.com/en-us/dotnet/csharp/discards
+    
 
 42. 
