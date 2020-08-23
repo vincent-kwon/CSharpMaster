@@ -153,4 +153,5 @@
     https://docs.microsoft.com/en-us/dotnet/csharp/discards
     
 
-42. 
+42. anonymous tuple usage
+     var (_, _, _, pop1, _, pop2) = QueryCityDataForYears("New York City", 1960, 2010);
